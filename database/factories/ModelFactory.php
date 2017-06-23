@@ -19,3 +19,14 @@ $factory->define(FormularioAplicacao\User::class, function (Faker\Generator $fak
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(FormularioAplicacao\Client::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'responsible' => $faker->name,
+        'email' => $faker->safeEmail,
+        'phone' => $faker->tollFreePhoneNumber,
+        'address' => $faker->address,
+        'obs' => $faker->realText($maxNbChars = 200, $indexSize = 2)
+    ];
+});

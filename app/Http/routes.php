@@ -10,7 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Illuminate\Http\Request;
+use FormularioAplicacao\Http\Requests;
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::group(['prefix' => 'client'], function(){
+    Route::get('/', [ 'as' => 'clients' , 'uses' => 'ClientController@index']);
+    Route::post('/', [ 'as' => 'clients' , 'uses' => 'ClientController@store']);
+    Route::get('/{id}', [ 'as' => 'clients' , 'uses' => 'ClientController@show']);
+    Route::put('/{id}', [ 'as' => 'clients' , 'uses' => 'ClientController@update']);
+    Route::delete('/{id}', [ 'as' => 'clients' , 'uses' => 'ClientController@destroy']);
 });
