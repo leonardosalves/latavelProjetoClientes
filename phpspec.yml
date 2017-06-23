@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: FormularioAplicacao
+        psr4_prefix: FormularioAplicacao
+        src_path: app
