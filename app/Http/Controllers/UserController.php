@@ -2,8 +2,8 @@
 
 namespace FormularioAplicacao\Http\Controllers;
 
-use FormularioAplicacao\Services\ClientService;
-use FormularioAplicacao\Repositories\ClientRepository;
+use FormularioAplicacao\Services\UserService;
+use FormularioAplicacao\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -15,7 +15,7 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ClientRepository $repository,ClientService $service){
+    public function __construct(UserRepository $repository,UserService $service){
         $this->repository = $repository;
         $this->service = $service;
     }
@@ -23,7 +23,7 @@ class ClientController extends Controller
     public function index()
     {
         //
-        return $this->service->all();
+        return $this->repository->all();
        // return response()->json($clients);
     }
 
@@ -58,7 +58,7 @@ class ClientController extends Controller
     public function show($id)
     {
         //
-        return $this->service->show($id);
+        return $this->repository->find($id);
     }
 
     /**
@@ -70,7 +70,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         //
-        return $this->service->find($id)->save();
+        return $this->repository->find($id)->save();
     }
 
     /**
@@ -83,7 +83,7 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->service->find($id)->update($request->all());
+        $this->repository->find($id)->update($request->all());
     
     }
 
@@ -96,6 +96,6 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
-        return $this->service->find($id)->delete();
+        return $this->repository->find($id)->delete();
     }
 }

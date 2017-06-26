@@ -10,15 +10,27 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use Illuminate\Http\Request;
-use FormularioAplicacao\Http\Requests;
-
-
-
 Route::group(['prefix' => 'client'], function(){
-    Route::get('/', [ 'as' => 'clients' , 'uses' => 'ClientController@index']);
-    Route::post('/', [ 'as' => 'clients' , 'uses' => 'ClientController@store']);
-    Route::get('/{id}', [ 'as' => 'clients' , 'uses' => 'ClientController@show']);
-    Route::put('/{id}', [ 'as' => 'clients' , 'uses' => 'ClientController@update']);
-    Route::delete('/{id}', [ 'as' => 'clients' , 'uses' => 'ClientController@destroy']);
+    Route::get('/', [ 'as' => 'clients.lista' , 'uses' => 'ClientController@index']);
+    Route::post('/', [ 'as' => 'clients.store' , 'uses' => 'ClientController@store']);
+    Route::get('/{id}', [ 'as' => 'clients.mostrar' , 'uses' => 'ClientController@show']);
+    Route::put('/{id}', [ 'as' => 'clients.update' , 'uses' => 'ClientController@update']);
+    Route::delete('/{id}', [ 'as' => 'clients.delete' , 'uses' => 'ClientController@destroy']);
+});
+
+Route::group(['prefix' => 'project'], function(){
+    Route::get('/', [ 'as' => 'projects' , 'uses' => 'ProjectController@index']);
+    Route::post('/', [ 'as' => 'projects' , 'uses' => 'ProjectController@store']);
+    Route::get('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectController@show']);
+    Route::put('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectController@update']);
+    Route::delete('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectController@destroy']);
+});
+
+
+Route::group(['prefix' => 'project_notes'], function(){
+    Route::get('/', [ 'as' => 'projects' , 'uses' => 'ProjectNotesController@index']);
+    Route::post('/', [ 'as' => 'projects' , 'uses' => 'ProjectNotesController@store']);
+    Route::get('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectNotesController@show']);
+    Route::put('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectNotesController@update']);
+    Route::delete('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectNotesController@destroy']);
 });

@@ -136,6 +136,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -144,6 +146,7 @@ return [
         FormularioAplicacao\Providers\AuthServiceProvider::class,
         FormularioAplicacao\Providers\EventServiceProvider::class,
         FormularioAplicacao\Providers\RouteServiceProvider::class,
+        FormularioAplicacao\Providers\FormularioAplicacaoRepositoryProvider::class
 
     ],
 

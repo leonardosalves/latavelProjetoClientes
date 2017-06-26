@@ -2,11 +2,11 @@
 
 namespace FormularioAplicacao\Http\Controllers;
 
-use FormularioAplicacao\Services\ClientService;
-use FormularioAplicacao\Repositories\ClientRepository;
+use FormularioAplicacao\Services\ProjectService;
+use FormularioAplicacao\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class ProjectController extends Controller
 {
     protected $repository;
     private $service;
@@ -15,7 +15,7 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ClientRepository $repository,ClientService $service){
+    public function __construct(ProjectRepository $repository,ProjectService $service){
         $this->repository = $repository;
         $this->service = $service;
     }
@@ -23,7 +23,7 @@ class ClientController extends Controller
     public function index()
     {
         //
-        return $this->service->all();
+        return $this->service->index();
        // return response()->json($clients);
     }
 
@@ -58,7 +58,7 @@ class ClientController extends Controller
     public function show($id)
     {
         //
-        return $this->service->show($id);
+        return $this->service->find($id);
     }
 
     /**
