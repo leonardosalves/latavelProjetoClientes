@@ -11,11 +11,14 @@
 |
 */
 
-$factory->define(\FormularioAplicacao\Entities\User::class, function (Faker\Generator $faker) {
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(FormularioAplicacao\Entities\User::class, function (Faker\Generator $faker) {
+    static $password;
+
     return [
         'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
@@ -30,7 +33,6 @@ $factory->define(\FormularioAplicacao\Entities\Client::class, function (Faker\Ge
         'obs' => $faker->realText($maxNbChars = 200, $indexSize = 2)
     ];
 });
-
 $factory->define(\FormularioAplicacao\Entities\Project::class, function (Faker\Generator $faker) {
     return [
         'owner_id' => rand(1,10),
@@ -42,9 +44,6 @@ $factory->define(\FormularioAplicacao\Entities\Project::class, function (Faker\G
         'due_date' => $faker->dateTime('now'),
     ];
 });
-
-
-
 $factory->define(\FormularioAplicacao\Entities\ProjectNotes::class, function (Faker\Generator $faker) {
     return [
         'project_id' => rand(1,10),

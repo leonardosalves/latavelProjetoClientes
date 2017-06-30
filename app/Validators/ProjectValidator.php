@@ -1,14 +1,17 @@
 <?php
-
-namespace CodeProject\Validators;
+namespace FormularioAplicacao\Validators;
 
 use Prettus\Validator\LaravelValidator;
 
-class ClientValidator extends LaravelValidator
+class ProjectValidator extends LaravelValidator
 {
     protected $rules = [
-        'title' => 'required',
-        'note' => 'required'
+        'owner_id' => 'required|integer',
+        'client_id' => 'required|integer',
+        'name' => 'required',
+        'description' => 'required',
+        'progress' => 'required|integer|min:0|max:100',
+        'status' => 'required|integer|min:1|max:3',
+        'due_date' => 'required|date'
     ]; 
-
 }

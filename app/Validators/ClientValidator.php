@@ -1,7 +1,5 @@
 <?php
-
-namespace CodeProject\Validators;
-
+namespace FormularioAplicacao\Validators;
 use Prettus\Validator\LaravelValidator;
 
 class ClientValidator extends LaravelValidator

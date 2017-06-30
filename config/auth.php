@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => FormularioAplicacao\User::class,
+    'model' => FormularioAplicacao\Entities\User::class,
 
     /*
     |--------------------------------------------------------------------------

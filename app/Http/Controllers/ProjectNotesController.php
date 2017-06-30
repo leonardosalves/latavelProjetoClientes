@@ -2,31 +2,34 @@
 
 namespace FormularioAplicacao\Http\Controllers;
 
-use FormularioAplicacao\Services\ProjectNotesService;
-use FormularioAplicacao\Repositories\ProjectNotesRepository;
-use Illuminate\Http\Request;
+use FormularioAplicacao\Services\ProjectNotesService;use Illuminate\Http\Request;
 
 class ProjectNotesController extends Controller
 {
-    protected $repository;
+    
     private $service;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ProjectNotesRepository $repository,ProjectNotesService $service){
-        $this->repository = $repository;
+    public function __construct(ProjectNotesService $service){
         $this->service = $service;
     }
     
-    public function index()
+    public function allNotes()
     {
-        //
-        return $this->repository->all();
-       // return response()->json($clients);
+        return $this->service->getAll();
     }
 
+
+
+    public function index($id_project)
+    {
+        //
+        return $this->service->all($id_project);
+       // return response()->json($clients);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +39,6 @@ class ProjectNotesController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -48,7 +50,6 @@ class ProjectNotesController extends Controller
         //
         return $this->service->create($request->all());
     }
-
     /**
      * Display the specified resource.
      *
@@ -58,9 +59,8 @@ class ProjectNotesController extends Controller
     public function show($id)
     {
         //
-        return $this->repository->find($id);
+        return $this->service->show($id);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -70,9 +70,8 @@ class ProjectNotesController extends Controller
     public function edit($id)
     {
         //
-        return $this->repository->find($id)->save();
+        return $this->service->find($id)->save();
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -83,10 +82,10 @@ class ProjectNotesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->repository->find($id)->update($request->all());
+        
+        return $this->service->update($request->all(), $id);
     
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -95,7 +94,6 @@ class ProjectNotesController extends Controller
      */
     public function destroy($id)
     {
-        //
-        return $this->repository->find($id)->delete();
+        return $this->service->delete($id);
     }
 }
