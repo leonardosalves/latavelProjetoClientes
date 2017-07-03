@@ -30,4 +30,8 @@ class Project extends Model implements Transformable
         return $this->BelongsTo(Client::class);
     }
 
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'project_members', 'project_id', 'member_id');
+    }
 }

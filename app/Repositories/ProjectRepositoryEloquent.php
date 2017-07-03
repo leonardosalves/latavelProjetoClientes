@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use FormularioAplicacao\Repositories\ProjectRepository;
 use FormularioAplicacao\Entities\Project;
 use FormularioAplicacao\Validators\ProjectValidator;
+use FormularioAplicacao\Presenters\ProjectPresenter;
 
 /**
  * Class ProjectRepositoryEloquent
@@ -56,5 +57,10 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
 
             return false;
         }
+    }
+
+    public function presenter()
+    {
+        return ProjectPresenter::class;
     }
 }

@@ -51,3 +51,10 @@ $factory->define(\FormularioAplicacao\Entities\ProjectNotes::class, function (Fa
         'note' => $faker->paragraph
     ];
 });
+
+$factory->define(\FormularioAplicacao\Entities\ProjectMember::class, function (Faker\Generator $faker) {
+    return [
+        'project_id' => rand(1,10),
+        'member_id' => rand(1,10)
+    ];
+});
