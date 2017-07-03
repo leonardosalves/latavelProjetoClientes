@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::post('ouath/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
@@ -19,16 +18,16 @@ Route::post('ouath/access_token', function() {
 
 Route::group(['middleware' => 'oauth'], function() {
     Route::group(['prefix' => 'client'], function(){
-        Route::get('/', 'ClientController@index',['except' => ['create', 'edit']]);
-        /*//Retorna todos projetos deste client
+        //Route::get('/', 'ClientController@index',['except' => ['create', 'edit']]);
+        //Retorna todos projetos deste client
         Route::get('/projects/{id}', ['as' => 'clients.projects', 'uses' => 'ClientController@AllProjects']);
         Route::post('/', [ 'as' => 'clients.store' , 'uses' => 'ClientController@store']);
         Route::get('/{id}', [ 'as' => 'clients.mostrar' , 'uses' => 'ClientController@show']);
         Route::put('/{id}', [ 'as' => 'clients.update' , 'uses' => 'ClientController@update']);
-        Route::delete('/{id}', [ 'as' => 'clients.delete' , 'uses' => 'ClientController@destroy']);*/
+        Route::delete('/{id}', [ 'as' => 'clients.delete' , 'uses' => 'ClientController@destroy']);
     });
-    Route::group(['prefix' => 'project'], function(){
-        Route::get('/', 'ProjectController@index',['except' => ['create', 'edit']]);
+    Route::group(['prefix' => 'project','middleware' => 'CheckProjectOwner'], function(){
+        //Route::get('/', 'ProjectController@index',['except' => ['create', 'edit']]);
         
         Route::get('/', [ 'as' => 'projects' , 'uses' => 'ProjectController@index']);
         Route::post('/', [ 'as' => 'projects' , 'uses' => 'ProjectController@store']);

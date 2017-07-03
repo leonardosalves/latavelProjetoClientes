@@ -3,25 +3,53 @@
 namespace FormularioAplicacao\Http\Controllers;
 
 use FormularioAplicacao\Services\ProjectService;
+use FormularioAplicacao\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
+
 
 class ProjectController extends Controller
 {
     private $service;
+    private $repository;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ProjectService $service){
+    public function __construct(ProjectService $service, ProjectRepository $repository){
         $this->service = $service;
+        $this->repository = $repository;
+    }
+
+    private function checkProjectOwner($projectid)
+    {
+        $userId = \Authorizer::getResourceOwnerId();
+        return $this->repository->isOwner($projectid, $userId);
     }
     
+    private function checkprojectMember()
+    {
+        $userId = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->hasMember($projectid, $userId);
+    }
+
+    private function checkProjectPermissions()
+    {
+        if($this->checkProjectOwner($projectid) or $this->checkprojectMember($projectid))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public function index()
     {
         //
-        return $this->service->all();
+        //return $this->service->all();
        // return response()->json($clients);
+       return $this->repository->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
     }
     /**
      * Show the form for creating a new resource.
@@ -52,7 +80,11 @@ class ProjectController extends Controller
     public function show($id)
     {
         //
-        return $this->service->show($id);
+        if($this->checkProjectOwner($id) == false )
+        {
+            return ['error' =>  'Access Forbiden'];
+        }
+        return $this->repository->find($id);
     }
     /**
      * Show the form for editing the specified resource.
