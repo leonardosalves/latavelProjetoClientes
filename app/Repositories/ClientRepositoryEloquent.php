@@ -12,6 +12,8 @@ use FormularioAplicacao\Validators\ClientValidator;
  * Class ClientRepositoryEloquent
  * @package namespace FormularioAplicacao\Repositories;
  */
+
+
 class ClientRepositoryEloquent extends BaseRepository implements ClientRepository
 {
     /**
