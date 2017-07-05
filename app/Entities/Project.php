@@ -27,11 +27,15 @@ class Project extends Model implements Transformable
 
     public function client()
     {
-        return $this->BelongsTo(Client::class);
+        return $this->belongsTo(Client::class);
     }
 
     public function members()
     {
         return $this->belongsToMany(User::class, 'project_members', 'project_id', 'member_id');
+    }
+    public function files()
+    {
+        return $this->hasMany(ProjectFile::class);
     }
 }

@@ -34,6 +34,9 @@ Route::group(['middleware' => 'oauth'], function() {
         Route::get('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectController@show']);
         Route::put('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectController@update']);
         Route::delete('/{id}', [ 'as' => 'projects' , 'uses' => 'ProjectController@destroy']);
+
+
+        Route::get('/{id}/file', ['as' => 'projects' ,'uses' => 'ProjectFileController@store']);
     });
     Route::group(['prefix' => 'project_notes'], function(){
         //Route::get('/allnotes', [ 'as' => 'projects' , 'uses' => 'ProjectNotesController@allNotes']);
